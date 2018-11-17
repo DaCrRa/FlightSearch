@@ -1,5 +1,7 @@
 package com.lastminute;
 
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.junit.Test;
@@ -34,7 +36,12 @@ public class ReadFlightsTest
 
 	private String fullPathTo(String fileName)
 	{
-		return getClass().getClassLoader().getResource(fileName).getPath();
+		try {
+			return Paths.get(getClass().getClassLoader().getResource(fileName).toURI()).toString();
+		} catch (URISyntaxException e) {
+			// Quite unlikely
+			throw new RuntimeException("ClassLoader.getResource(Sting) returned an URL not compliant with URI syntax.");
+		}
 	}
 
 	private void allFlightsRead(List<List<String>> flights)
