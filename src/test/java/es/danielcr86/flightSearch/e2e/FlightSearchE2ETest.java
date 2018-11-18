@@ -10,6 +10,8 @@ import java.util.List;
 
 import es.danielcr86.flightSearch.FlightSearch;
 import es.danielcr86.flightSearch.FlightSearchResult;
+import es.danielcr86.flightSearch.FlightSource;
+import es.danielcr86.flightSearch.FilteredFlightSource;
 
 public class FlightSearchE2ETest {
 
@@ -18,7 +20,8 @@ public class FlightSearchE2ETest {
 	@BeforeClass
 	public static void configureSearchEngine()
 	{
-		searchEngine = new FlightSearch();
+		searchEngine = new FlightSearch(new FilteredFlightSource(new FlightSource() {
+		}));
 	}
 
 	/**
