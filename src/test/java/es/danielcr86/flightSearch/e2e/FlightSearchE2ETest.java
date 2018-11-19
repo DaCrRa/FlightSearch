@@ -4,6 +4,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat; 
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
+import static org.mockito.Mockito.mock;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 
 import java.util.List;
@@ -20,8 +21,7 @@ public class FlightSearchE2ETest {
 	@BeforeClass
 	public static void configureSearchEngine()
 	{
-		searchEngine = new FlightSearch(new FilteredFlightSource(new FlightSource() {
-		}));
+		searchEngine = new FlightSearch(new FilteredFlightSource(mock(FlightSource.class)));
 	}
 
 	/**
