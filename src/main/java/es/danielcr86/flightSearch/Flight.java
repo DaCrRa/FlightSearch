@@ -11,4 +11,20 @@ public class Flight {
 		this.destination = destination;
 		this.code = code;
 	}
+
+	@Override
+	public boolean equals(Object otherFlight) {
+		if (otherFlight != null && otherFlight instanceof Flight) {
+			Flight other = (Flight) otherFlight;
+			return this.origin == other.origin &&
+					this.destination == other.destination &&
+					this.code == other.code;
+		}
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		return code + ": " + origin + " -> " + destination;
+	}
 }
