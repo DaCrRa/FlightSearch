@@ -27,4 +27,12 @@ public class Flight {
 	public String toString() {
 		return code + ": " + origin + " -> " + destination;
 	}
+
+	public String getOrigin() {
+		return origin;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
 }

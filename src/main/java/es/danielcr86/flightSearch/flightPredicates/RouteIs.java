@@ -9,12 +9,9 @@ public class RouteIs {
 	public static Predicate<Flight> routeIs(String from, String to) {
 		return new Predicate<Flight>() {
 			@Override
-			public boolean test(Flight t) {
-				// TODO Auto-generated method stub
-
-				System.out.println(from);
-				System.out.println(to);
-				return false;
+			public boolean test(Flight flight) {
+				return flight.getOrigin().equals(from) &&
+						flight.getDestination().equals(to);
 			}
 		};
 	}

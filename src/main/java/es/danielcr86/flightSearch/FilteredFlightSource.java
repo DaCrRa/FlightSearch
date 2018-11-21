@@ -10,6 +10,6 @@ public class FilteredFlightSource {
 	}
 
 	public Stream<Flight> getFlights(Predicate<Flight> filter) {
-		return flightSource.getFlights();
+		return flightSource.getFlights().filter(filter);
 	}
 }
