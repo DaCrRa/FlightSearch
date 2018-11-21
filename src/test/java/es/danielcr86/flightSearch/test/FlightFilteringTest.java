@@ -1,6 +1,7 @@
 package es.danielcr86.flightSearch.test;
 
 import static org.junit.Assert.assertThat;
+import static es.danielcr86.flightSearch.flightPredicates.RouteIs.routeIs;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.mockito.Mockito.mock;
@@ -15,7 +16,6 @@ import org.junit.Test;
 import es.danielcr86.flightSearch.FilteredFlightSource;
 import es.danielcr86.flightSearch.Flight;
 import es.danielcr86.flightSearch.FlightSource;
-import es.danielcr86.flightSearch.RouteFlightFilter;
 
 public class FlightFilteringTest {
 
@@ -43,9 +43,7 @@ public class FlightFilteringTest {
 
 		FilteredFlightSource filteredflightSource = new FilteredFlightSource(emptyFlightSource);
 
-		RouteFlightFilter filter = new RouteFlightFilter("MAD", "BCN");
-
-		List<Flight> listOfFilteredFlights = filteredflightSource.getFlights(filter).collect(Collectors.toList());
+		List<Flight> listOfFilteredFlights = filteredflightSource.getFlights(routeIs("MAD", "BCN")).collect(Collectors.toList());
 
 		assertThat(listOfFilteredFlights, empty());
 	}
@@ -60,9 +58,7 @@ public class FlightFilteringTest {
 
 		FilteredFlightSource filteredflightSource = new FilteredFlightSource(emptyFlightSource);
 
-		RouteFlightFilter filter = new RouteFlightFilter("MAD", "BCN");
-
-		List<Flight> listOfFilteredFlights = filteredflightSource.getFlights(filter).collect(Collectors.toList());
+		List<Flight> listOfFilteredFlights = filteredflightSource.getFlights(routeIs("MAD", "BCN")).collect(Collectors.toList());
 
 		assertThat(listOfFilteredFlights, containsInAnyOrder(new Flight("MAD", "BCN", "IBnnnnn")));
 	}
@@ -72,9 +68,7 @@ public class FlightFilteringTest {
 	{
 		FilteredFlightSource filteredflightSource = new FilteredFlightSource(flightSourceWithFlights);
 
-		RouteFlightFilter filter = new RouteFlightFilter("MAD", "BCN");
-
-		List<Flight> listOfFilteredFlights = filteredflightSource.getFlights(filter).collect(Collectors.toList());
+		List<Flight> listOfFilteredFlights = filteredflightSource.getFlights(routeIs("MAD", "BCN")).collect(Collectors.toList());
 
 		assertThat(listOfFilteredFlights, containsInAnyOrder(new Flight("MAD", "BCN", "IBnnnnn")));
 	}
@@ -84,9 +78,7 @@ public class FlightFilteringTest {
 	{
 		FilteredFlightSource filteredflightSource = new FilteredFlightSource(flightSourceWithFlights);
 
-		RouteFlightFilter filter = new RouteFlightFilter("ARN", "MAD");
-
-		List<Flight> listOfFilteredFlights = filteredflightSource.getFlights(filter).collect(Collectors.toList());
+		List<Flight> listOfFilteredFlights = filteredflightSource.getFlights(routeIs("ARN", "MAD")).collect(Collectors.toList());
 
 		assertThat(listOfFilteredFlights, containsInAnyOrder(
 				new Flight("ARN", "MAD", "IByyyyy"),
@@ -100,9 +92,7 @@ public class FlightFilteringTest {
 	{
 		FilteredFlightSource filteredflightSource = new FilteredFlightSource(flightSourceWithFlights);
 
-		RouteFlightFilter filter = new RouteFlightFilter("MAD", "ARN");
-
-		List<Flight> listOfFilteredFlights = filteredflightSource.getFlights(filter).collect(Collectors.toList());
+		List<Flight> listOfFilteredFlights = filteredflightSource.getFlights(routeIs("MAD", "ARN")).collect(Collectors.toList());
 
 		assertThat(listOfFilteredFlights, empty());
 	}
