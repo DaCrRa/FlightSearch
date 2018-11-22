@@ -4,14 +4,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat; 
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
-import static org.mockito.Mockito.mock;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.List;
 
 import es.danielcr86.flightSearch.FlightSearch;
 import es.danielcr86.flightSearch.FlightSearchResult;
-import es.danielcr86.flightSearch.FlightSource;
+import es.danielcr86.flightSearch.CsvFileFlightSource;
 import es.danielcr86.flightSearch.FilteredFlightSource;
 
 public class FlightSearchE2ETest {
@@ -21,7 +22,21 @@ public class FlightSearchE2ETest {
 	@BeforeClass
 	public static void configureSearchEngine()
 	{
-		searchEngine = new FlightSearch(new FilteredFlightSource(mock(FlightSource.class)));
+		searchEngine = new FlightSearch(
+				new FilteredFlightSource(
+						new CsvFileFlightSource(fullPathTo("flight-routes.csv")
+								)
+						)
+				);
+	}
+
+	private static String fullPathTo(String fileName) {
+		try {
+			return Paths.get(FlightSearchE2ETest.class.getClassLoader().getResource(fileName).toURI()).toString();
+		} catch (URISyntaxException e) {
+			// Quite unlikely
+			throw new RuntimeException("ClassLoader.getResource(Sting) returned an URL not compliant with URI syntax.");
+		}
 	}
 
 	/**
