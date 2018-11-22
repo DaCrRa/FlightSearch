@@ -5,8 +5,10 @@ import java.util.stream.Stream;
 
 public class FilteredFlightSource {
 
+	FlightSource flightSource;
+
 	public FilteredFlightSource(FlightSource flightSource) {
-		// TODO Auto-generated constructor stub
+		this.flightSource = flightSource;
 	}
 
 	public Stream<Flight> getFlights(Predicate<Flight> filter) {

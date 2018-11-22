@@ -1,7 +1,9 @@
 package es.danielcr86.flightSearch;
 
-import java.util.Arrays;
+import static es.danielcr86.flightSearch.flightPredicates.RouteIs.routeIs;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FlightSearch {
 
@@ -12,12 +14,9 @@ public class FlightSearch {
 	}
 
 	public List<FlightSearchResult> search(String origin, String destination) {
-
-		return Arrays.asList(
-				new FlightSearchResult("TK2372"),
-				new FlightSearchResult("TK2659"),
-				new FlightSearchResult("LH5909")
-				);
+		return flightSource.getFlights(routeIs(origin, destination))
+				.map(flight -> new FlightSearchResult(flight.getCode()))
+				.collect(Collectors.toList());
 	}
 
 }

@@ -35,4 +35,8 @@ public class Flight {
 	public String getDestination() {
 		return destination;
 	}
+
+	public String getCode() {
+		return code;
+	}
 }
