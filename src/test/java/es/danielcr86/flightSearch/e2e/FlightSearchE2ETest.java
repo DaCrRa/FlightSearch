@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 
+import java.math.BigDecimal;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.List;
@@ -43,9 +44,9 @@ public class FlightSearchE2ETest {
 	 *  1 passenger, 31 days to the departure date, flying AMS -> FRA
 	 *
 	 * flights: 
-	 * TK2372, 157.6 €
-	 * TK2659, 198.4 €
-	 * LH5909, 90.4 €
+	 * TK2372, 157.6 € (80% of 197)
+	 * TK2659, 198.4 € (80% of 248)
+	 * LH5909, 90.4 € (80% of 113)
 	 */
 	@Test
 	public void fromAMS_toFRA_1passenger_31days()
@@ -53,9 +54,9 @@ public class FlightSearchE2ETest {
 		List<FlightSearchResult> results = searchEngine.search("AMS", "FRA", 1, 31);
 
 		assertThat(results, containsInAnyOrder(
-				new FlightSearchResult("TK2372"),
-				new FlightSearchResult("TK2659"),
-				new FlightSearchResult("LH5909")
+				new FlightSearchResult("TK2372", BigDecimal.valueOf(197)),
+				new FlightSearchResult("TK2659", BigDecimal.valueOf(248)),
+				new FlightSearchResult("LH5909", BigDecimal.valueOf(113))
 				));
 	}
 
@@ -72,8 +73,8 @@ public class FlightSearchE2ETest {
 		List<FlightSearchResult> results = searchEngine.search("LHR", "IST", 3, 15);
 
 		assertThat(results, containsInAnyOrder(
-				new FlightSearchResult("TK8891"),
-				new FlightSearchResult("LH1085")
+				new FlightSearchResult("TK8891", BigDecimal.valueOf(250)),
+				new FlightSearchResult("LH1085", BigDecimal.valueOf(148))
 				));
 	}
 
@@ -90,8 +91,8 @@ public class FlightSearchE2ETest {
 		List<FlightSearchResult> results = searchEngine.search("BCN", "MAD", 2, 2);
 
 		assertThat(results, containsInAnyOrder(
-				new FlightSearchResult("IB2171"),
-				new FlightSearchResult("LH5496")
+				new FlightSearchResult("IB2171", BigDecimal.valueOf(259)),
+				new FlightSearchResult("LH5496", BigDecimal.valueOf(293))
 				));
 	}
 
