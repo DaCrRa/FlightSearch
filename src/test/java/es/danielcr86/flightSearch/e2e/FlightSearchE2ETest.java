@@ -50,7 +50,7 @@ public class FlightSearchE2ETest {
 	@Test
 	public void fromAMS_toFRA_1passenger_31days()
 	{
-		List<FlightSearchResult> results = searchEngine.search("AMS", "FRA");
+		List<FlightSearchResult> results = searchEngine.search("AMS", "FRA", 1, 31);
 
 		assertThat(results, containsInAnyOrder(
 				new FlightSearchResult("TK2372"),
@@ -69,7 +69,7 @@ public class FlightSearchE2ETest {
 	@Test
 	public void fromLHR_toIST_3passengers_15days()
 	{
-		List<FlightSearchResult> results = searchEngine.search("LHR", "IST");
+		List<FlightSearchResult> results = searchEngine.search("LHR", "IST", 3, 15);
 
 		assertThat(results, containsInAnyOrder(
 				new FlightSearchResult("TK8891"),
@@ -87,7 +87,7 @@ public class FlightSearchE2ETest {
 	@Test
 	public void fromBCN_toMAD_2passengers_2days()
 	{
-		List<FlightSearchResult> results = searchEngine.search("BCN", "MAD");
+		List<FlightSearchResult> results = searchEngine.search("BCN", "MAD", 2, 2);
 
 		assertThat(results, containsInAnyOrder(
 				new FlightSearchResult("IB2171"),
@@ -103,7 +103,7 @@ public class FlightSearchE2ETest {
 	@Test
 	public void fromCDG_toFRA()
 	{
-		List<FlightSearchResult> results = searchEngine.search("CDG", "FRA");
+		List<FlightSearchResult> results = searchEngine.search("CDG", "FRA", 3, 5);
 
 		assertThat(results, empty());
 	}

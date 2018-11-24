@@ -13,7 +13,7 @@ public class FlightSearch {
 		this.flightSource = flightSource;
 	}
 
-	public List<FlightSearchResult> search(String origin, String destination) {
+	public List<FlightSearchResult> search(String origin, String destination, int passengers, int daysTillDeparture) {
 		return flightSource.getFlights(routeIs(origin, destination))
 				.map(flight -> new FlightSearchResult(flight.getCode()))
 				.collect(Collectors.toList());
