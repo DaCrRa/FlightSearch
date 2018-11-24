@@ -11,8 +11,9 @@ public class FlightSearch {
 	private FilteredFlightSource flightSource;
 	private PricingSource pricingSource;
 
-	public FlightSearch(FilteredFlightSource flightSource) {
+	public FlightSearch(FilteredFlightSource flightSource, PricingSource pricingSource) {
 		this.flightSource = flightSource;
+		this.pricingSource = pricingSource;
 	}
 
 	public List<FlightSearchResult> search(String origin, String destination, int passengers, int daysTillDeparture) {

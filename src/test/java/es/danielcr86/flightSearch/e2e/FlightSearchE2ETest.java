@@ -13,7 +13,9 @@ import java.util.List;
 
 import es.danielcr86.flightSearch.FlightSearch;
 import es.danielcr86.flightSearch.FlightSearchResult;
+import es.danielcr86.flightSearch.PricingSource;
 import es.danielcr86.flightSearch.CsvFileFlightSource;
+import es.danielcr86.flightSearch.CsvFilePricingSource;
 import es.danielcr86.flightSearch.FilteredFlightSource;
 
 public class FlightSearchE2ETest {
@@ -23,12 +25,9 @@ public class FlightSearchE2ETest {
 	@BeforeClass
 	public static void configureSearchEngine()
 	{
-		searchEngine = new FlightSearch(
-				new FilteredFlightSource(
-						new CsvFileFlightSource(fullPathTo("flight-routes.csv")
-								)
-						)
-				);
+		FilteredFlightSource filteredFlightSource = new FilteredFlightSource(new CsvFileFlightSource(fullPathTo("flight-routes.csv")));
+		PricingSource pricingSource = new CsvFilePricingSource(fullPathTo("flight-prices.csv"));
+		searchEngine = new FlightSearch(filteredFlightSource, pricingSource);
 	}
 
 	private static String fullPathTo(String fileName) {
