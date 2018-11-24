@@ -20,7 +20,7 @@ public class FlightSearchResult {
 	public boolean equals(Object otherResult) {
 		if (otherResult != null && otherResult instanceof FlightSearchResult) {
 			FlightSearchResult other = (FlightSearchResult) otherResult;
-			return this.flightCode == other.flightCode &&
+			return this.flightCode.equals(other.flightCode) &&
 					this.price.compareTo(other.price) == 0;
 		}
 		return false;

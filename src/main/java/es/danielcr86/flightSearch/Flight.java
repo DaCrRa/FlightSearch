@@ -16,9 +16,9 @@ public class Flight {
 	public boolean equals(Object otherFlight) {
 		if (otherFlight != null && otherFlight instanceof Flight) {
 			Flight other = (Flight) otherFlight;
-			return this.origin == other.origin &&
-					this.destination == other.destination &&
-					this.code == other.code;
+			return this.origin.equals(other.origin) &&
+					this.destination.equals(other.destination) &&
+					this.code.equals(other.code);
 		}
 		return false;
 	}
