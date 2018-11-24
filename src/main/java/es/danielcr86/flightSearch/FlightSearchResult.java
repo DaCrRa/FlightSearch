@@ -5,24 +5,29 @@ import java.math.BigDecimal;
 public class FlightSearchResult {
 
 	private String flightCode;
+	private BigDecimal price;
 
 	public FlightSearchResult(String flightCode) {
-		this.flightCode = flightCode;
+		this(flightCode, BigDecimal.ZERO);
 	}
 
 	public FlightSearchResult(String flightCode, BigDecimal price) {
-		this(flightCode);
+		this.flightCode = flightCode;
+		this.price = price;
 	}
 
 	@Override
 	public boolean equals(Object otherResult) {
-		return otherResult != null &&
-				otherResult instanceof FlightSearchResult &&
-				((FlightSearchResult) otherResult).flightCode.equals(this.flightCode);
+		if (otherResult != null && otherResult instanceof FlightSearchResult) {
+			FlightSearchResult other = (FlightSearchResult) otherResult;
+			return this.flightCode == other.flightCode &&
+					this.price.compareTo(other.price) == 0;
+		}
+		return false;
 	}
 
 	@Override
 	public String toString() {
-		return this.flightCode;
+		return this.flightCode + "  " + price.toString();
 	}
 }
