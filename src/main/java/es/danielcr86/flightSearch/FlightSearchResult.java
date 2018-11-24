@@ -34,4 +34,8 @@ public class FlightSearchResult {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+
+	public String getFlightCode() {
+		return flightCode;
+	}
 }

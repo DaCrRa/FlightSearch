@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class FlightSearch {
 
 	private FilteredFlightSource flightSource;
+	private PricingSource pricingSource;
 
 	public FlightSearch(FilteredFlightSource flightSource) {
 		this.flightSource = flightSource;
@@ -22,7 +23,8 @@ public class FlightSearch {
 	}
 
 	private void setPriceInFlightSearchResult(FlightSearchResult result) {
-		result.setPrice(BigDecimal.valueOf(5));
+		BigDecimal price = pricingSource.getPrice(result.getFlightCode());
+		result.setPrice(price);
 	}
 
 }
