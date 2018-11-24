@@ -20,14 +20,16 @@ public class FlightSearch {
 	public List<FlightSearchResult> search(String origin, String destination, int passengers, int daysTillDeparture) {
 		return flightSource.getFlights(routeIs(origin, destination))
 				.map(flight -> new FlightSearchResult(flight.getCode()))
-				.peek(result -> setPriceInFlightSearchResult(result, passengers))
+				.peek(result -> setPriceInFlightSearchResult(result, passengers, daysTillDeparture))
 				.collect(Collectors.toList());
 	}
 
-	private void setPriceInFlightSearchResult(FlightSearchResult result, int passengers) {
-		Optional<BigDecimal> price = pricingSource.getPrice(result.getFlightCode());
-		price.ifPresent(priceValue -> {
-			result.setPrice(priceValue.multiply(BigDecimal.valueOf(passengers)));
+	private void setPriceInFlightSearchResult(FlightSearchResult result, int passengers, int daysTillDeparture) {
+		PriceModifier priceModifier = new DepartureDateBasedPriceModifier(daysTillDeparture);
+		Optional<BigDecimal> basePrice = pricingSource.getPrice(result.getFlightCode());
+		basePrice.ifPresent(basePriceValue -> {
+			BigDecimal finalPrice = priceModifier.modifyPrice(basePriceValue);
+			result.setPrice(finalPrice.multiply(BigDecimal.valueOf(passengers)));
 		});
 	}
 
