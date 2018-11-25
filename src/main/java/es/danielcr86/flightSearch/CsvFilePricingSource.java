@@ -1,11 +1,11 @@
 package es.danielcr86.flightSearch;
 
-import java.math.BigDecimal;
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Stream;
 
 import com.lastminute.CsvFiles;
 
-public class CsvFilePricingSource implements PricingSource {
+public class CsvFilePricingSource extends StreamOfListOfStringPriceDeserializer {
 
 	private String csvFilePath;
 
@@ -14,15 +14,8 @@ public class CsvFilePricingSource implements PricingSource {
 	}
 
 	@Override
-	public Optional<BigDecimal> getPrice(String flightCode) {
-		return CsvFiles.records(csvFilePath)
-				.filter(list -> {
-					return list.get(0).equals(flightCode);
-				})
-				.findFirst()
-				.map(priceEntry -> {
-					return BigDecimal.valueOf(Double.parseDouble(priceEntry.get(1)));
-				});
+	public Stream<List<String>> readPriceData() {
+		return CsvFiles.records(csvFilePath);
 	}
 
 }
