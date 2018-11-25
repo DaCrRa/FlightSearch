@@ -4,6 +4,7 @@ import static es.danielcr86.flightSearch.flightPredicates.RouteIs.routeIs;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class FlightSearch {
@@ -24,8 +25,8 @@ public class FlightSearch {
 	}
 
 	private void setPriceInFlightSearchResult(FlightSearchResult result) {
-		BigDecimal price = pricingSource.getPrice(result.getFlightCode());
-		result.setPrice(price);
+		Optional<BigDecimal> price = pricingSource.getPrice(result.getFlightCode());
+		price.ifPresent(result::setPrice);
 	}
 
 }

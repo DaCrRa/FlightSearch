@@ -1,9 +1,10 @@
 package es.danielcr86.flightSearch;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 public interface PricingSource {
 
-	BigDecimal getPrice(String flightCode);
+	Optional<BigDecimal> getPrice(String flightCode);
 
 }
