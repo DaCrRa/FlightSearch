@@ -38,7 +38,7 @@ public class FlightSearchResult {
 
 	@Override
 	public String toString() {
-		return this.flightCode + "  " + price.toString();
+		return this.flightCode + "  " + (price.isPresent() ? price.get().toString() : "price not available");
 	}
 
 	public void setPrice(BigDecimal price) {
