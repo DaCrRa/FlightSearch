@@ -24,7 +24,7 @@ public class DepartureDateBasedPriceModifier implements PriceModifier {
 		} else {
 			modifiedPrice = basePrice.multiply(BigDecimal.valueOf(1.5));
 		}
-		return modifiedPrice;
+		return modifiedPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
 	}
 
 }
