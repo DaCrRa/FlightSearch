@@ -12,12 +12,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import es.danielcr86.flightSearch.pricingSources.StreamOfListOfStringPriceDeserializer;
+
 import static org.hamcrest.number.IsCloseTo.closeTo;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-
-import es.danielcr86.flightSearch.StreamOfListOfStringPriceDeserializer;
 
 public class SreamOfListOfStringPriceDeserializerTest {
 

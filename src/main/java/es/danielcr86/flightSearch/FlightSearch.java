@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import es.danielcr86.flightSearch.flightSources.FilteredFlightSource;
+import es.danielcr86.flightSearch.pricingSources.PricingSource;
 
 public class FlightSearch {
 

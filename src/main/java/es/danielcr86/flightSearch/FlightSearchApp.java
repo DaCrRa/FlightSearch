@@ -8,6 +8,8 @@ import java.time.format.DateTimeParseException;
 
 import es.danielcr86.flightSearch.flightSources.CsvFileFlightSource;
 import es.danielcr86.flightSearch.flightSources.FilteredFlightSource;
+import es.danielcr86.flightSearch.pricingSources.CsvFilePricingSource;
+import es.danielcr86.flightSearch.pricingSources.PricingSource;
 
 public class FlightSearchApp {
 

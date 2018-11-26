@@ -17,13 +17,13 @@ import java.util.List;
 
 import es.danielcr86.flightSearch.FlightSearch;
 import es.danielcr86.flightSearch.FlightSearchResult;
-import es.danielcr86.flightSearch.PricingSource;
 import es.danielcr86.flightSearch.WrongNumberOfPassengersException;
 import es.danielcr86.flightSearch.flightSources.CsvFileFlightSource;
 import es.danielcr86.flightSearch.flightSources.FilteredFlightSource;
+import es.danielcr86.flightSearch.pricingSources.CsvFilePricingSource;
+import es.danielcr86.flightSearch.pricingSources.PricingSource;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import es.danielcr86.flightSearch.CsvFilePricingSource;
 import es.danielcr86.flightSearch.DateInThePastException;
 
 @RunWith(JUnitParamsRunner.class)
