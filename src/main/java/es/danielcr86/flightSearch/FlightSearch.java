@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FlightSearch {
 
@@ -19,11 +20,14 @@ public class FlightSearch {
 	}
 
 	public List<FlightSearchResult> search(String origin, String destination, int passengers, LocalDate departureDate) {
+		return searchAsStream(origin, destination, passengers, departureDate).collect(Collectors.toList());
+	}
+
+	public Stream<FlightSearchResult> searchAsStream(String origin, String destination, int passengers, LocalDate departureDate) {
 		PriceModifier priceModifier = new DepartureDateBasedPriceModifier(departureDate);
 		return flightSource.getFlights(routeIs(origin, destination))
 				.map(flight -> new FlightSearchResult(flight.getCode()))
-				.peek(result -> setPriceInFlightSearchResult(result, passengers, priceModifier))
-				.collect(Collectors.toList());
+				.peek(result -> setPriceInFlightSearchResult(result, passengers, priceModifier));
 	}
 
 	private void setPriceInFlightSearchResult(FlightSearchResult result, int passengers, PriceModifier priceModifier) {
