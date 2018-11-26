@@ -1,13 +1,15 @@
 package es.danielcr86.flightSearch;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class DepartureDateBasedPriceModifier implements PriceModifier {
 
-	private int daysTillDeparture;
+	private long daysTillDeparture;
 
-	public DepartureDateBasedPriceModifier(int daysTillDeparture) {
-		this.daysTillDeparture = daysTillDeparture;
+	public DepartureDateBasedPriceModifier(LocalDate departureDate) {
+		this.daysTillDeparture = DAYS.between(LocalDate.now(), departureDate);
 	}
 
 	@Override

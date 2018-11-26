@@ -9,6 +9,8 @@ import static org.hamcrest.collection.IsEmptyCollection.empty;
 import java.math.BigDecimal;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.List;
 
 import es.danielcr86.flightSearch.FlightSearch;
@@ -50,7 +52,9 @@ public class FlightSearchE2ETest {
 	@Test
 	public void fromAMS_toFRA_1passenger_31days()
 	{
-		List<FlightSearchResult> results = searchEngine.search("AMS", "FRA", 1, 31);
+		LocalDate _31DaysFromNow = LocalDate.now().plus(31, DAYS);
+
+		List<FlightSearchResult> results = searchEngine.search("AMS", "FRA", 1, _31DaysFromNow);
 
 		assertThat(results, containsInAnyOrder(
 				new FlightSearchResult("TK2372", BigDecimal.valueOf( 0.8 * 197 ).setScale(2, BigDecimal.ROUND_HALF_UP)),
@@ -69,7 +73,9 @@ public class FlightSearchE2ETest {
 	@Test
 	public void fromLHR_toIST_3passengers_15days()
 	{
-		List<FlightSearchResult> results = searchEngine.search("LHR", "IST", 3, 15);
+		LocalDate _15DaysFromNow = LocalDate.now().plus(15, DAYS);
+
+		List<FlightSearchResult> results = searchEngine.search("LHR", "IST", 3, _15DaysFromNow);
 
 		assertThat(results, containsInAnyOrder(
 				new FlightSearchResult("TK8891", BigDecimal.valueOf(3 * (1.2 * 250) ).setScale(2, BigDecimal.ROUND_HALF_UP)),
@@ -87,7 +93,9 @@ public class FlightSearchE2ETest {
 	@Test
 	public void fromBCN_toMAD_2passengers_2days()
 	{
-		List<FlightSearchResult> results = searchEngine.search("BCN", "MAD", 2, 2);
+		LocalDate _2DaysFromNow = LocalDate.now().plus(2, DAYS);
+
+		List<FlightSearchResult> results = searchEngine.search("BCN", "MAD", 2, _2DaysFromNow);
 
 		assertThat(results, containsInAnyOrder(
 				new FlightSearchResult("IB2171", BigDecimal.valueOf(2 * (1.5 * 259) ).setScale(2, BigDecimal.ROUND_HALF_UP)),
@@ -103,7 +111,9 @@ public class FlightSearchE2ETest {
 	@Test
 	public void fromCDG_toFRA()
 	{
-		List<FlightSearchResult> results = searchEngine.search("CDG", "FRA", 3, 5);
+		LocalDate _5DaysFromNow = LocalDate.now().plus(5, DAYS);
+
+		List<FlightSearchResult> results = searchEngine.search("CDG", "FRA", 3, _5DaysFromNow);
 
 		assertThat(results, empty());
 	}
