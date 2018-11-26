@@ -23,6 +23,7 @@ import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import es.danielcr86.flightSearch.CsvFileFlightSource;
 import es.danielcr86.flightSearch.CsvFilePricingSource;
+import es.danielcr86.flightSearch.DateInThePastException;
 import es.danielcr86.flightSearch.FilteredFlightSource;
 
 @RunWith(JUnitParamsRunner.class)
@@ -55,9 +56,10 @@ public class FlightSearchE2ETest {
 	 * TK2659, 198.4 € (80% of 248)
 	 * LH5909, 90.4 € (80% of 113)
 	 * @throws WrongNumberOfPassengersException 
+	 * @throws DateInThePastException 
 	 */
 	@Test
-	public void fromAMS_toFRA_1passenger_31days() throws WrongNumberOfPassengersException
+	public void fromAMS_toFRA_1passenger_31days() throws WrongNumberOfPassengersException, DateInThePastException
 	{
 		LocalDate _31DaysFromNow = LocalDate.now().plus(31, DAYS);
 
@@ -77,9 +79,10 @@ public class FlightSearchE2ETest {
 	 * TK8891, 900 € (3 * (120% of 250))
 	 * LH1085, 532.8 € (3 * (120% of 148))
 	 * @throws WrongNumberOfPassengersException 
+	 * @throws DateInThePastException 
 	 */
 	@Test
-	public void fromLHR_toIST_3passengers_15days() throws WrongNumberOfPassengersException
+	public void fromLHR_toIST_3passengers_15days() throws WrongNumberOfPassengersException, DateInThePastException
 	{
 		LocalDate _15DaysFromNow = LocalDate.now().plus(15, DAYS);
 
@@ -98,9 +101,10 @@ public class FlightSearchE2ETest {
 	 * IB2171, 777 € (2 * (150% of 259))
 	 * LH5496, 879 € (2 * (150% of 293))
 	 * @throws WrongNumberOfPassengersException 
+	 * @throws DateInThePastException 
 	 */
 	@Test
-	public void fromBCN_toMAD_2passengers_2days() throws WrongNumberOfPassengersException
+	public void fromBCN_toMAD_2passengers_2days() throws WrongNumberOfPassengersException, DateInThePastException
 	{
 		LocalDate _2DaysFromNow = LocalDate.now().plus(2, DAYS);
 
@@ -117,9 +121,10 @@ public class FlightSearchE2ETest {
 	 * 
 	 * no flights available
 	 * @throws WrongNumberOfPassengersException 
+	 * @throws DateInThePastException 
 	 */
 	@Test
-	public void fromCDG_toFRA() throws WrongNumberOfPassengersException
+	public void fromCDG_toFRA() throws WrongNumberOfPassengersException, DateInThePastException
 	{
 		LocalDate _5DaysFromNow = LocalDate.now().plus(5, DAYS);
 
@@ -130,7 +135,12 @@ public class FlightSearchE2ETest {
 
 	@Test(expected = WrongNumberOfPassengersException.class)
 	@Parameters({"0", "-1", "-10"})
-	public void wrongNumberOfPassengersThrowsException(int wrongNumberOfPassengers) throws WrongNumberOfPassengersException {
+	public void wrongNumberOfPassengersThrowsException(int wrongNumberOfPassengers) throws WrongNumberOfPassengersException, DateInThePastException {
 		searchEngine.search("origin", "destination", wrongNumberOfPassengers, LocalDate.now());
+	}
+
+	@Test(expected = DateInThePastException.class)
+	public void dateInThePastThrowsException() throws WrongNumberOfPassengersException, DateInThePastException {
+		searchEngine.search("origin", "destination", 2, LocalDate.now().minusMonths(5));
 	}
 }

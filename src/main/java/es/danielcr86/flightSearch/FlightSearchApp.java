@@ -45,8 +45,10 @@ public class FlightSearchApp {
 		System.out.println("From: " + origin + "     To: " + destination + "     Passengers: " + passengers + "     Date: " + departureDate);
 
 		try {
-			searchEngine.searchAsStream(origin, destination, passengers, departureDate).forEach(System.out::println);
+			searchEngine.searchAsStream(origin, destination, passengers, departureDate).forEach(System.out::println); 
 		} catch (WrongNumberOfPassengersException e) {
+			System.out.println(e.getMessage());
+		} catch (DateInThePastException e) {
 			System.out.println(e.getMessage());
 		}
 	}

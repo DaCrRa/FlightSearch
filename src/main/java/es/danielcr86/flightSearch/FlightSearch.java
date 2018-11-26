@@ -19,13 +19,20 @@ public class FlightSearch {
 		this.pricingSource = pricingSource;
 	}
 
-	public List<FlightSearchResult> search(String origin, String destination, int passengers, LocalDate departureDate) throws WrongNumberOfPassengersException {
+	public List<FlightSearchResult> search(String origin, String destination, int passengers, LocalDate departureDate)
+			throws WrongNumberOfPassengersException, DateInThePastException {
+
 		return searchAsStream(origin, destination, passengers, departureDate).collect(Collectors.toList());
 	}
 
-	public Stream<FlightSearchResult> searchAsStream(String origin, String destination, int passengers, LocalDate departureDate) throws WrongNumberOfPassengersException {
+	public Stream<FlightSearchResult> searchAsStream(String origin, String destination, int passengers, LocalDate departureDate)
+			throws WrongNumberOfPassengersException, DateInThePastException {
+
 		if (passengers <= 0) {
 			throw new WrongNumberOfPassengersException(passengers);
+		}
+		if (departureDate.isBefore(LocalDate.now())) {
+			throw new DateInThePastException(departureDate);
 		}
 		PriceModifier priceModifier = new DepartureDateBasedPriceModifier(departureDate);
 		return flightSource.getFlights(routeIs(origin, destination))
