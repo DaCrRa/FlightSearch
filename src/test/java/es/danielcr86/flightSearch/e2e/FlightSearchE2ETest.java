@@ -2,6 +2,8 @@ package es.danielcr86.flightSearch.e2e;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import static org.hamcrest.MatcherAssert.assertThat; 
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
@@ -16,10 +18,14 @@ import java.util.List;
 import es.danielcr86.flightSearch.FlightSearch;
 import es.danielcr86.flightSearch.FlightSearchResult;
 import es.danielcr86.flightSearch.PricingSource;
+import es.danielcr86.flightSearch.WrongNumberOfPassengersException;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import es.danielcr86.flightSearch.CsvFileFlightSource;
 import es.danielcr86.flightSearch.CsvFilePricingSource;
 import es.danielcr86.flightSearch.FilteredFlightSource;
 
+@RunWith(JUnitParamsRunner.class)
 public class FlightSearchE2ETest {
 
 	private static FlightSearch searchEngine;
@@ -48,9 +54,10 @@ public class FlightSearchE2ETest {
 	 * TK2372, 157.6 € (80% of 197)
 	 * TK2659, 198.4 € (80% of 248)
 	 * LH5909, 90.4 € (80% of 113)
+	 * @throws WrongNumberOfPassengersException 
 	 */
 	@Test
-	public void fromAMS_toFRA_1passenger_31days()
+	public void fromAMS_toFRA_1passenger_31days() throws WrongNumberOfPassengersException
 	{
 		LocalDate _31DaysFromNow = LocalDate.now().plus(31, DAYS);
 
@@ -69,9 +76,10 @@ public class FlightSearchE2ETest {
 	 * flights:
 	 * TK8891, 900 € (3 * (120% of 250))
 	 * LH1085, 532.8 € (3 * (120% of 148))
+	 * @throws WrongNumberOfPassengersException 
 	 */
 	@Test
-	public void fromLHR_toIST_3passengers_15days()
+	public void fromLHR_toIST_3passengers_15days() throws WrongNumberOfPassengersException
 	{
 		LocalDate _15DaysFromNow = LocalDate.now().plus(15, DAYS);
 
@@ -89,9 +97,10 @@ public class FlightSearchE2ETest {
 	 * flights:
 	 * IB2171, 777 € (2 * (150% of 259))
 	 * LH5496, 879 € (2 * (150% of 293))
+	 * @throws WrongNumberOfPassengersException 
 	 */
 	@Test
-	public void fromBCN_toMAD_2passengers_2days()
+	public void fromBCN_toMAD_2passengers_2days() throws WrongNumberOfPassengersException
 	{
 		LocalDate _2DaysFromNow = LocalDate.now().plus(2, DAYS);
 
@@ -107,14 +116,21 @@ public class FlightSearchE2ETest {
 	 * CDG -> FRA
 	 * 
 	 * no flights available
+	 * @throws WrongNumberOfPassengersException 
 	 */
 	@Test
-	public void fromCDG_toFRA()
+	public void fromCDG_toFRA() throws WrongNumberOfPassengersException
 	{
 		LocalDate _5DaysFromNow = LocalDate.now().plus(5, DAYS);
 
 		List<FlightSearchResult> results = searchEngine.search("CDG", "FRA", 3, _5DaysFromNow);
 
 		assertThat(results, empty());
+	}
+
+	@Test(expected = WrongNumberOfPassengersException.class)
+	@Parameters({"0", "-1", "-10"})
+	public void wrongNumberOfPassengersThrowsException(int wrongNumberOfPassengers) throws WrongNumberOfPassengersException {
+		searchEngine.search("origin", "destination", wrongNumberOfPassengers, LocalDate.now());
 	}
 }
