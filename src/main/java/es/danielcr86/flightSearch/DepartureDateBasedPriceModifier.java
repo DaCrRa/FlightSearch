@@ -12,8 +12,17 @@ public class DepartureDateBasedPriceModifier implements PriceModifier {
 
 	@Override
 	public BigDecimal modifyPrice(BigDecimal basePrice) {
-		// TODO Auto-generated method stub
-		return basePrice;
+		BigDecimal modifiedPrice;
+		if (daysTillDeparture >= 31) {
+			modifiedPrice = basePrice.multiply(BigDecimal.valueOf(0.8));
+		} else if (daysTillDeparture >= 16) {
+			modifiedPrice = basePrice;
+		} else if (daysTillDeparture >= 3) {
+			modifiedPrice = basePrice.multiply(BigDecimal.valueOf(1.2));
+		} else {
+			modifiedPrice = basePrice.multiply(BigDecimal.valueOf(1.5));
+		}
+		return modifiedPrice;
 	}
 
 }

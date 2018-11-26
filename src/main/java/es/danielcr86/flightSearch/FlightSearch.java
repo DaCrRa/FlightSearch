@@ -29,7 +29,7 @@ public class FlightSearch {
 		Optional<BigDecimal> basePrice = pricingSource.getPrice(result.getFlightCode());
 		basePrice.ifPresent(basePriceValue -> {
 			BigDecimal finalPrice = priceModifier.modifyPrice(basePriceValue);
-			result.setPrice(finalPrice.multiply(BigDecimal.valueOf(passengers)));
+			result.setPrice(finalPrice.multiply(BigDecimal.valueOf(passengers).setScale(2, BigDecimal.ROUND_HALF_UP)));
 		});
 	}
 

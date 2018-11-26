@@ -53,9 +53,9 @@ public class FlightSearchE2ETest {
 		List<FlightSearchResult> results = searchEngine.search("AMS", "FRA", 1, 31);
 
 		assertThat(results, containsInAnyOrder(
-				new FlightSearchResult("TK2372", BigDecimal.valueOf(197)),
-				new FlightSearchResult("TK2659", BigDecimal.valueOf(248)),
-				new FlightSearchResult("LH5909", BigDecimal.valueOf(113))
+				new FlightSearchResult("TK2372", BigDecimal.valueOf( 0.8 * 197 ).setScale(2, BigDecimal.ROUND_HALF_UP)),
+				new FlightSearchResult("TK2659", BigDecimal.valueOf( 0.8 * 248 ).setScale(2, BigDecimal.ROUND_HALF_UP)),
+				new FlightSearchResult("LH5909", BigDecimal.valueOf( 0.8 * 113 ).setScale(2, BigDecimal.ROUND_HALF_UP))
 				));
 	}
 
@@ -72,8 +72,8 @@ public class FlightSearchE2ETest {
 		List<FlightSearchResult> results = searchEngine.search("LHR", "IST", 3, 15);
 
 		assertThat(results, containsInAnyOrder(
-				new FlightSearchResult("TK8891", BigDecimal.valueOf(3 * 250)),
-				new FlightSearchResult("LH1085", BigDecimal.valueOf(3 * 148))
+				new FlightSearchResult("TK8891", BigDecimal.valueOf(3 * (1.2 * 250) ).setScale(2, BigDecimal.ROUND_HALF_UP)),
+				new FlightSearchResult("LH1085", BigDecimal.valueOf(3 * (1.2 * 148) ).setScale(2, BigDecimal.ROUND_HALF_UP))
 				));
 	}
 
@@ -90,8 +90,8 @@ public class FlightSearchE2ETest {
 		List<FlightSearchResult> results = searchEngine.search("BCN", "MAD", 2, 2);
 
 		assertThat(results, containsInAnyOrder(
-				new FlightSearchResult("IB2171", BigDecimal.valueOf(2 * 259)),
-				new FlightSearchResult("LH5496", BigDecimal.valueOf(2 * 293))
+				new FlightSearchResult("IB2171", BigDecimal.valueOf(2 * (1.5 * 259) ).setScale(2, BigDecimal.ROUND_HALF_UP)),
+				new FlightSearchResult("LH5496", BigDecimal.valueOf(2 * (1.5 * 293) ).setScale(2, BigDecimal.ROUND_HALF_UP))
 				));
 	}
 
