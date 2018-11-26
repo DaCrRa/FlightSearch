@@ -1,4 +1,4 @@
-package es.danielcr86.flightSearch;
+package es.danielcr86.flightSearch.priceModifiers;
 
 import java.math.BigDecimal;
 

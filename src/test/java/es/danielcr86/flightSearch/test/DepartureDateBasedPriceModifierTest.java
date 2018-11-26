@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import es.danielcr86.flightSearch.DepartureDateBasedPriceModifier;
+import es.danielcr86.flightSearch.priceModifiers.DepartureDateBasedPriceModifier;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 

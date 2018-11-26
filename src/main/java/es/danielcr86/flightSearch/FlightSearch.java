@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import es.danielcr86.flightSearch.flightSources.FilteredFlightSource;
+import es.danielcr86.flightSearch.priceModifiers.DepartureDateBasedPriceModifier;
+import es.danielcr86.flightSearch.priceModifiers.PriceModifier;
 import es.danielcr86.flightSearch.pricingSources.PricingSource;
 
 public class FlightSearch {

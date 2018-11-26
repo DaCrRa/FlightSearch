@@ -1,7 +1,8 @@
-package es.danielcr86.flightSearch;
+package es.danielcr86.flightSearch.priceModifiers;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class DepartureDateBasedPriceModifier implements PriceModifier {
