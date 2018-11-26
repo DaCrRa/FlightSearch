@@ -13,9 +13,10 @@ import java.util.stream.Stream;
 
 import org.junit.Before;
 import org.junit.Test;
-import es.danielcr86.flightSearch.FilteredFlightSource;
+
 import es.danielcr86.flightSearch.Flight;
-import es.danielcr86.flightSearch.FlightSource;
+import es.danielcr86.flightSearch.flightSources.FilteredFlightSource;
+import es.danielcr86.flightSearch.flightSources.FlightSource;
 
 public class FlightFilteringTest {
 

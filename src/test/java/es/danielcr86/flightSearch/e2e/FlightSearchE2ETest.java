@@ -19,12 +19,12 @@ import es.danielcr86.flightSearch.FlightSearch;
 import es.danielcr86.flightSearch.FlightSearchResult;
 import es.danielcr86.flightSearch.PricingSource;
 import es.danielcr86.flightSearch.WrongNumberOfPassengersException;
+import es.danielcr86.flightSearch.flightSources.CsvFileFlightSource;
+import es.danielcr86.flightSearch.flightSources.FilteredFlightSource;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import es.danielcr86.flightSearch.CsvFileFlightSource;
 import es.danielcr86.flightSearch.CsvFilePricingSource;
 import es.danielcr86.flightSearch.DateInThePastException;
-import es.danielcr86.flightSearch.FilteredFlightSource;
 
 @RunWith(JUnitParamsRunner.class)
 public class FlightSearchE2ETest {

@@ -1,4 +1,4 @@
-package es.danielcr86.flightSearch;
+package es.danielcr86.flightSearch.flightSources;
 
 import java.util.List;
 import java.util.stream.Stream;

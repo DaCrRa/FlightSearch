@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import es.danielcr86.flightSearch.flightSources.FilteredFlightSource;
+
 public class FlightSearch {
 
 	private FilteredFlightSource flightSource;

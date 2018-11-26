@@ -1,7 +1,9 @@
-package es.danielcr86.flightSearch;
+package es.danielcr86.flightSearch.flightSources;
 
 import java.util.List;
 import java.util.stream.Stream;
+
+import es.danielcr86.flightSearch.Flight;
 
 public abstract class StreamOfListOfStringFlightDeserializer implements FlightSource {
 

@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import es.danielcr86.flightSearch.flightSources.CsvFileFlightSource;
+import es.danielcr86.flightSearch.flightSources.FilteredFlightSource;
+
 public class FlightSearchApp {
 
 	public static void main(String[] args) {

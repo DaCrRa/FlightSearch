@@ -16,7 +16,7 @@ import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
 
 import es.danielcr86.flightSearch.Flight;
-import es.danielcr86.flightSearch.StreamOfListOfStringFlightDeserializer;
+import es.danielcr86.flightSearch.flightSources.StreamOfListOfStringFlightDeserializer;
 
 public class SreamOfListOfStringFlightDeserializerTest {
 

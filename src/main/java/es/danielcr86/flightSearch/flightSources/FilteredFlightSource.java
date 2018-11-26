@@ -1,7 +1,9 @@
-package es.danielcr86.flightSearch;
+package es.danielcr86.flightSearch.flightSources;
 
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+
+import es.danielcr86.flightSearch.Flight;
 
 public class FilteredFlightSource {
 
